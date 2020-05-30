@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://www.osce.gob.pe/contratos/soap/api/gen"
+	xmlns:tns="http://www.osce.gob.pe/contratos/soap/api/gen"
+	elementFormDefault="qualified">
+
+	<xsd:element name="CustomerRequest">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="rucCodigoContratista" type="xsd:string" />
+				<xsd:element name="rucEntidadContratante" type="xsd:string" />
+				<xsd:element name="fechaSuscripcionContrato" type="xsd:string" />
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+
+	<xsd:element name="CustomerResponse">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="codigoError" type="xsd:string" />
+				<xsd:element name="mensajeError" type="xsd:string" />
+				<xsd:element name="contrato" type="tns:contrato" maxOccurs="unbounded"/>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+	
+	<xsd:complexType name="contrato">
+        <xsd:sequence>
+            <xsd:element name="rucCodigoContratista" type="xsd:string"/>
+            <xsd:element name="nombreRazonSocialContratista" type="xsd:string"/>
+            <xsd:element name="esConsorcio" type="xsd:string"/>
+            <xsd:element name="rucEntidadContratante" type="xsd:string"/>
+            <xsd:element name="nombreEntidadContratante" type="xsd:string"/>
+            <xsd:element name="nomenclaturaProceso" type="xsd:string"/>
+            <xsd:element name="objetoContratacion" type="xsd:string"/>
+            <xsd:element name="numeroContrato" type="xsd:string"/>
+            <xsd:element name="descripcionContrato" type="xsd:string"/>
+            <xsd:element name="tipoMoneda" type="xsd:string"/>
+            <xsd:element name="montoContrato" type="xsd:decimal"/>
+            <xsd:element name="fechaSuscripcionContrato" type="xsd:string"/>
+            <xsd:element name="fechaPublicacion" type="xsd:string"/>
+            <xsd:element name="fechaInicioVigenciaProgramado" type="xsd:string"/>
+            <xsd:element name="fechaFinVigenciaProgramado" type="xsd:string"/>
+            <xsd:element name="idContrato" type="xsd:long"/>
+            <xsd:element name="idOperacion" type="xsd:long"/>
+            <xsd:element name="idExpediente" type="xsd:long"/>
+            <xsd:element name="proyecto" type="tns:proyecto" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="proyecto">
+        <xsd:sequence>
+            <xsd:element name="codigoUnicoInversion" type="xsd:string"/>
+            <xsd:element name="nombreEntidad" type="xsd:string"/>
+            <xsd:element name="nombreProyectoInversion" type="xsd:string"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
