@@ -24,6 +24,7 @@ public class ContratoServiceImpl implements ContratoService {
 	@Autowired
 	private ContratoRepository contratoRepository;
 
+
 	@Override
 	public CustomerResponse obtenerContrato(CustomerRequest request) {
 		CustomerResponse response = new CustomerResponse();
@@ -48,7 +49,7 @@ public class ContratoServiceImpl implements ContratoService {
 			
 			if (parametrosCorrectos) {
 				List<ContratoDto> contratosdto = contratoRepository.cargarContratos(request);
-				contratosdto.forEach(obj -> {
+				for(ContratoDto obj : contratosdto) {
 					Contrato contrato = new Contrato();
 					contrato.setRucCodigoContratista(obj.getRucCodigoContratista());
 					contrato.setNombreRazonSocialContratista(obj.getNombreRazonSocialContratista());
@@ -66,7 +67,7 @@ public class ContratoServiceImpl implements ContratoService {
 					contrato.setFechaInicioVigenciaProgramado(obj.getFechaInicioVigenciaProgramado());
 					contrato.setFechaFinVigenciaProgramado(obj.getFechaFinVigenciaProgramado());
 					contrato.setIdContrato(obj.getIdContrato());
-					contrato.setIdExpediente(obj.getIdExpediente());
+					contrato.setIdExpediente(obj.getIdExpediente() == null? 0L : obj.getIdExpediente());
 					obj.getProyectos().forEach(obj2 -> {
 						Proyecto proyecto = new Proyecto();
 						proyecto.setCodigoUnicoInversion(obj2.getCodigoUnicoInversion());
@@ -75,7 +76,7 @@ public class ContratoServiceImpl implements ContratoService {
 						contrato.getProyecto().add(proyecto);
 					});
 					response.getContrato().add(contrato);
-				});
+				};
 				response.setCodigoError(MensajeResponseType.MSJ_OPERACION_COMPLETADA.getKey());
 				response.setMensajeError(MensajeResponseType.MSJ_OPERACION_COMPLETADA.getValue());
 			}
